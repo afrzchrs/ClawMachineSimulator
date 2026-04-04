@@ -9,20 +9,24 @@ SRCS = main.c \
        src/algo/dda.c \
        src/algo/bresenham.c \
        src/algo/midcircle.c \
-       src/ui/primitives.c \
+       src/algo/kurvaBezierKuadratik.c \
        src/ui/back_button.c \
-       src/ui/cartesian.c \
-       src/screens/program1.c \
-       src/screens/program2.c \
-       src/screens/program3.c \
-       src/screens/program4.c \
-       src/screens/program5.c \
-       src/screens/program6.c \
-       src/screens/program7.c \
-       src/screens/program8.c \
-       src/screens/program9.c \
+       src/screens/claw.c \
        src/screens/about.c \
-       src/screens/menu.c
+       src/screens/menu.c \
+       src/ui/prize.c \
+       src/ui/drawClaw.c \
+       src/ui/cable.c \
+       src/ui/tombolCapit.c \
+       src/ui/bodyMesin.c \
+       src/ui/joystick.c \
+       src/ui/tombolOut.c \
+       src/ui/indikatorStatus.c \
+       src/ui/indikatorSkor.c \
+       src/screens/sound.c \
+       src/effect/stonePrizeVfx.c \
+       src/ui/lampu.c \
+       src/screens/model.c
 
 OBJS = $(SRCS:.c=.o)
 

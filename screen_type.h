@@ -1,9 +1,14 @@
 #ifndef SCREEN_TYPE_H
 #define SCREEN_TYPE_H
 
-#define SCREEN_W 1000
-#define SCREEN_H 700
+#define SCREEN_W 800
+#define SCREEN_H 600
 
-typedef enum { MENU, PROGRAM1, PROGRAM2, PROGRAM3, PROGRAM4, PROGRAM5, PROGRAM6, PROGRAM7, PROGRAM8, PROGRAM9, ABOUT } Screen;
+typedef enum {
+    MENU,
+    MODEL,
+    ABOUT,
+    CLAW
+} Screen;
 
 #endif
