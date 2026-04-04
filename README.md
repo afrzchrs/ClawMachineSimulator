@@ -19,7 +19,7 @@
 
 **Claw Machine Simulator** adalah aplikasi simulasi mesin capit interaktif 2D yang dikembangkan menggunakan bahasa pemrograman **C** dan *framework* **Raylib**. Proyek ini dibuat secara khusus untuk memenuhi Tugas Besar Ujian Tengah Semester (UTS) mata kuliah Grafika Komputer.
 
-Fokus utama dari proyek ini adalah **Procedural Rendering**. Aplikasi ini *tidak menggunakan asset gambar (sprite) eksternal* untuk menggambar objek utamanya. Seluruh elemen visual seperti capit, lengan mekanik, engsel, kabel penyangga yang melentur, hingga UI dirender murni menggunakan perhitungan matematis dan **Algoritma Primitif Grafika Komputer**.
+Fokus utama dari proyek ini adalah **Procedural Rendering**. Aplikasi ini *tidak menggunakan asset gambar (sprite) eksternal* untuk menggambar objek utamanya. Seluruh elemen visual seperti capit, lengan mekanik, engsel, kabel penyangga yang melentur, hingga UI dirender menggunakan perhitungan matematis dan **Algoritma Primitif Grafika Komputer**.
 
 ## 🧠 Implementasi Algoritma Grafika
 
