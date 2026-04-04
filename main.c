@@ -18,7 +18,7 @@ int main(void) {
     PlayMenuBGM();
 
     while (!WindowShouldClose()) {
-        if (IsKeyPressed(KEY_F11)) { //f11 fullscreen
+        if (IsKeyPressed(KEY_F11)) { 
             ToggleFullscreen();
         }
 
