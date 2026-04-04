@@ -71,9 +71,6 @@ void DrawModelScreen(void) {
     DrawLine(0, 60, SCREEN_W, 60, (Color){100, 200, 255, 255});
 
     float time = GetTime();
-    float wave = (sinf(time * 2.0f) + 1.0f) / 2.0f; 
-    float offset = 12.0f + (wave * 13.0f);
-
 
     // Inisialisasi Data Objek sesuai urutan yang kamu berikan
     Prize BolaBiru   = { 0, 0, 24, SKYBLUE, 0, 0, 0 }; 
