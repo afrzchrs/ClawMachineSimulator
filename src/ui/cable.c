@@ -30,9 +30,9 @@ void drawCable(float clawX, float clawY){
     float distX = fabsf(cableEnd.x - cableStart.x);
 
     // Mekanisme kelenturan kabel.
-    // Semakin dekat claw ke kiri (distX kecil), kabel semakin melengkung ke bawah.
+    // Semakin deket capit ke kiri (distX kecil), kabel semakin melengkung ke bawah.
     // Semakin jauh ke kanan, kabel semakin lurus menegang.
-    float maxSlack = 200.0f;                   // Lengkungan maksimal saat claw di paling kiri
+    float maxSlack = 200.0f;                   // Lengkungan maksimal saat capit di paling kiri
     float slack = maxSlack - (distX * 0.15f); // Jarak X mengurangi kelenturan
     if (slack < 0.0f) slack = 0.0f;           // mencegah kabel melengkung ke atas
 
