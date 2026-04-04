@@ -20,14 +20,14 @@ void DrawModelScreen(void) {
     // Animasi putaran/buka-tutup untuk pameran model
     float time = GetTime();
     float wave = (sinf(time * 2.0f) + 1.0f) / 2.0f; 
-    float offset = 12.0f + (wave * 13.0f); // Capit membuka dan menutup
+    float offset = 12.0f + (wave * 13.0f);
 
     // Render capit ukuran raksasa di tengah menggunakan Camera2D
     Camera2D camera = { 0 };
     camera.target = (Vector2){ 0.0f, 0.0f };
     camera.offset = (Vector2){ SCREEN_W / 2.0f, SCREEN_H / 2.0f - 50 }; 
     camera.rotation = 0.0f;
-    camera.zoom = 4.0f; // Skala 400%
+    camera.zoom = 4.0f; 
 
     BeginMode2D(camera);
         DrawClaw(0, 0, offset,0); 
