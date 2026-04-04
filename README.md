@@ -9,9 +9,9 @@
 
 ## 👨‍🎓 Identitas Mahasiswa
 
-* **Nama:** [Nama Lengkap Kamu]
-* **NIM:** [NIM Kamu]
-* **Kelas:** [Kelas Kamu, misal: D4-2A / D3-2B]
+* **Nama:** Afriza Choirie Saputra
+* **NIM:** 241524002
+* **Kelas:** D4-2A
 
 ---
 
