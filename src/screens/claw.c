@@ -1,7 +1,7 @@
 #include "src/screens/claw.h"
 #include "src/ui/indikatorStatus.h"
 
-// Variabel Statis (Dipertahankan antar frame)
+// Variabel Statis 
 static int initialized = 0;
 static ClawState state = STATE_IDLE;
 static float clawX = 0.0f;
@@ -101,7 +101,7 @@ int DrawProgramClaw(void) {
         case STATE_DROPPING:
             clawY += clawSpeed * dt;
             
-            int stopDropping = 0; // Penanda apakah capit harus berhenti
+            int stopDropping = 0; // Penanda capit harus berhenti
 
             // 1. Cek tabrakan dengan lantai (kondisi paling dasar)
             if (clawY >= bottomY - 50.0f) {
@@ -197,7 +197,7 @@ int DrawProgramClaw(void) {
                 }
 
                 PlaySfxUp();
-                state = STATE_RETURNING; // Naik kembali
+                state = STATE_RETURNING; // Naik lagi
             }
             break;
 
