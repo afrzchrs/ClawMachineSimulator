@@ -1,38 +1,60 @@
-# 🕹️ Claw Machine Simulator (Raylib)
+# 🕹️ Tugas Besar UTS Grafika Komputer: Claw Machine Simulator
 
-Sebuah simulator mesin capit (claw machine) interaktif berbasis 2D yang dikembangkan menggunakan bahasa **C** dan *framework* **Raylib**. 
+**Mata Kuliah:** Grafika Komputer  
+**Program Studi:** Teknik Informatika  
+**Semester:** 4  
+**Institusi:** Politeknik Negeri Bandung (POLBAN)  
 
-Proyek ini bukan sekadar *game* biasa, melainkan implementasi praktis dari berbagai **Algoritma Grafika Komputer** tingkat dasar hingga menengah untuk merender objek secara prosedural (tanpa menggunakan *asset* gambar/sprite eksternal untuk elemen utamanya).
+---
 
-## ✨ Fitur Utama
+## 👨‍🎓 Identitas Mahasiswa
 
-* **Procedural Rendering:** Hampir seluruh elemen visual (capit, kabel, UI, latar belakang) digambar menggunakan algoritma matematis murni:
-    * *Digital Differential Analyzer (DDA)* dan *Bresenham* untuk rendering garis lurus.
-    * *Midcircle Algorithm* untuk engsel dan roda.
-    * *Quadratic Bezier Curves* untuk simulasi kelenturan kabel penyangga secara dinamis.
-* **State Machine Logic:** Menggunakan *Finite State Machine* (Idle, Dropping, Grabbing, Returning, dll) untuk mengatur siklus animasi dan fisika capit yang mulus.
-* **Efek Visual Interaktif:**
-    * Animasi *idle* bergoyang (hovering) dengan kalkulasi sinus/cosinus.
-    * Sistem partikel sederhana (energy orb, debu bercahaya).
-    * Efek getaran layar (Screen Shake) saat capit berhasil menangkap hadiah tertentu.
-* **Multi-Screen Architecture:** Navigasi mulus antara Main Menu, Model Showcase, Simulasi Utama, dan About Page.
-* **Audio Integration:** Dilengkapi dengan BGM yang dinamis dan efek suara (SFX) rel, tombol, dan capit untuk pengalaman *arcade* yang nyata.
+* **Nama:** [Nama Lengkap Kamu]
+* **NIM:** [NIM Kamu]
+* **Kelas:** [Kelas Kamu, misal: D4-2A / D3-2B]
 
-## 🛠️ Teknologi yang Digunakan
-* **Bahasa:** C
-* **Library:** Raylib 5.5
-* **Compiler:** GCC (MinGW-w64)
-* **Build System:** Makefile
+---
 
-## 📁 Struktur Proyek
+## 📝 Deskripsi Proyek
+
+**Claw Machine Simulator** adalah aplikasi simulasi mesin capit interaktif 2D yang dikembangkan menggunakan bahasa pemrograman **C** dan *framework* **Raylib**. Proyek ini dibuat secara khusus untuk memenuhi Tugas Besar Ujian Tengah Semester (UTS) mata kuliah Grafika Komputer.
+
+Fokus utama dari proyek ini adalah **Procedural Rendering**. Aplikasi ini *tidak menggunakan asset gambar (sprite) eksternal* untuk menggambar objek utamanya. Seluruh elemen visual seperti capit, lengan mekanik, engsel, kabel penyangga yang melentur, hingga UI dirender murni menggunakan perhitungan matematis dan **Algoritma Primitif Grafika Komputer**.
+
+## 🧠 Implementasi Algoritma Grafika
+
+Proyek ini mendemonstrasikan penerapan langsung dari materi yang dipelajari di kelas:
+
+1. **Digital Differential Analyzer (DDA)**
+   * **Lokasi File:** `src/algo/dda.c`
+   * **Penerapan:** Digunakan secara ekstensif (melalui fungsi modifikasi `DDA_ThickLine`) untuk menggambar garis tebal pada lengan mekanik (arm) capit, tali vertikal, dan elemen struktur dekoratif pada UI.
+2. **Bresenham Line Algorithm**
+   * **Lokasi File:** `src/algo/bresenham.c`
+   * **Penerapan:** Diimplementasikan sebagai alternatif untuk rendering garis (seperti *dashed line* pada halaman About) yang bebas dari operasi *floating point*, memastikan efisiensi kalkulasi piksel.
+3. **Midpoint Circle Algorithm (Midcircle)**
+   * **Lokasi File:** `src/algo/midcircle.c`
+   * **Penerapan:** Digunakan sebagai dasar pembentukan engsel persendian (joint) pada capit, roda penggerak mekanik, serta basis dari objek bola hadiah (prize).
+4. **Quadratic Bezier Curve**
+   * **Lokasi File:** `src/algo/kurvaBezierKuadratik.c`
+   * **Penerapan:** Digunakan untuk mensimulasikan kelenturan (slack) pada kabel penyangga horizontal. Kurva akan secara dinamis menegang dan melentur berdasarkan jarak *claw* ke dinding mesin, memberikan efek fisika yang realistis.
+5. **Transformasi 2D (Camera & Matrix)**
+   * **Lokasi File:** Diimplementasikan pada `menu.c`, `claw.c`, dan `model.c`.
+   * **Penerapan:** Menggunakan manipulasi *Viewport* dan *Camera2D* untuk memberikan efek perbesaran (*Zoom*), pergeseran (*Translation*), dan efek getaran layar (*Screen Shake VFX*) secara *real-time*.
+
+## 📁 Struktur Direktori Proyek
+
+Proyek ini menerapkan modularitas *Clean Code* untuk memisahkan antara logika algoritma, antarmuka, kontrol status, dan aset.
+
 ```text
 mesinCapit/
 ├── src/
-│   ├── algo/      # Implementasi algoritma grafika (DDA, Bresenham, Bezier, Midcircle)
-│   ├── effect/    # Efek visual khusus (Screen shake, dll)
-│   ├── screens/   # Logika per-layar (Menu, Claw, Model, About, Sound)
-│   ├── ui/        # Komponen antarmuka & penggambaran objek (Claw, Cable, Buttons, Prizes)
-│   └── asset/     # File audio (BGM & SFX)
-├── main.c         # Entry point & State Manager utama
-├── screen_type.h  # Definisi enum layar & resolusi
-└── Makefile.win   # Konfigurasi build untuk Windows
+│   ├── algo/         # Inti dari algoritma primitif grafika (DDA, Bresenham, Midcircle, Bezier)
+│   ├── effect/       # Efek visual tambahan (VFX Kamera getar)
+│   ├── screens/      # State management antar layar (Menu, Claw, Model Showcase, About, Sound)
+│   ├── ui/           # Penggambaran komponen UI, Capit (DrawClaw), Kabel, Hadiah, dan Tombol
+│   └── asset/        # Aset Audio (BGM Menu, BGM Gameplay, dan SFX Arcade)
+├── coords.c / .h     # Helper untuk manajemen koordinat
+├── main.c            # Titik masuk program (Entry Point) & Game Loop utama
+├── screen_type.h     # Definisi enum Screen (MENU, MODEL, ABOUT, CLAW) dan Konstanta Layar
+├── Makefile          # Konfigurasi Build standar
+└── Makefile.win      # Konfigurasi Build khusus untuk lingkungan Windows (MinGW/w64devkit)
