@@ -12,11 +12,11 @@ void DrawAbout(void) {
     DrawRectangleRounded((Rectangle){cardX, cardY, cardW, cardH}, 0.05f, 16, (Color){30, 25, 50, 180});
     DrawRectangleRoundedLines((Rectangle){cardX, cardY, cardW, cardH}, 0.05f, 16, VIOLET);
 
-    // Avatar Placeholder (DDA Art)
+    // Avatar Placeholder 
     int avX = cardX + 120, avY = cardY + 120;
     int avR = 60;
     
-    // Lingkaran luar berputar (Aksen Cyberpunk)
+    // Lingkaran luar berputar 
     float time = GetTime();
     DrawRing((Vector2){avX, avY}, avR - 5, avR + 5, time * 50, (time * 50) + 280, 32, PINK);
     DrawCircle(avX, avY, avR - 10, (Color){40, 20, 60, 255});
@@ -35,7 +35,7 @@ void DrawAbout(void) {
     DrawText("Topik       : DDA & Bresenham Line", textX, cardY + 190, 18, LIGHTGRAY);
     DrawText("Framework   : Raylib 5.5 (Bahasa C)", textX, cardY + 220, 18, LIGHTGRAY);
 
-    // Daftar Program/Algoritma (Pill Badges)
+    // Daftar Program/Algoritma yang dipake
     int sumY = cardY + cardH + 30;
     const char *pLabels[] = {"DDA", "Bresenham", "Midcircle", "Bezier", "Raylib UI"};
     Color pColors[] = {SKYBLUE, GREEN, ORANGE, MAGENTA, YELLOW};
