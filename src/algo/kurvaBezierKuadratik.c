@@ -1,6 +1,6 @@
 #include "kurvaBezierKuadratik.h"
 
-// Fungsi pembantu untuk menghitung titik pada kurva Bezier Kuadratik
+// Fungsi helper buat menghitung titik pada kurva Bezier Kuadratik
 // t adalah nilai antara 0.0 (awal) hingga 1.0 (akhir)
 Vector2 GetQuadraticBezierPoint(Vector2 p0, Vector2 p1, Vector2 p2, float t) {
     float u = 1.0f - t;
