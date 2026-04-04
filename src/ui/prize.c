@@ -98,7 +98,7 @@ void DrawPrize(Prize p) {
         DDA_ThickLine(x - 6, y - 8, x - 4, y - 10, 2, BLACK); // Mata merem (garis miring)
         DDA_ThickLine(x + 4, y - 10, x + 6, y - 8, 2, BLACK);
 
-        // 5. TEKSTUR JAHITAN MANUAL (Poin Penting untuk Akurasi Koordinat)
+        // 5. TEKSTUR JAHITAN BONEKA
         // Membuktikan penggunaan loop dan koordinat presisi untuk tekstur
         for (int i = -8; i <= 8; i += 4) {
             // Jahitan melintang di perut
