@@ -7,7 +7,7 @@ void efekBgMiring(void){
     int speedGrid = 30; 
     int spacing = 40; 
     
-    // Pergerakan offset (mirip dengan kodemu sebelumnya)
+    // Pergerakan offset 
     int offset = (int)(currentTime * speedGrid) % spacing; 
 
     int batasAwal = -SCREEN_H;
