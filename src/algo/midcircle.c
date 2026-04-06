@@ -1,5 +1,7 @@
 #include "src/algo/midcircle.h"
 
+extern int wireframeMode;
+
 /*
  * Helper: Plot 8 titik simetri sekaligus (8-way symmetry)
  * Lingkaran memiliki simetri pada sumbu X, Y, dan diagonal
@@ -69,6 +71,11 @@ void Midcircle(int centerX, int centerY, int radius, Color color) {
  * alih-alih hanya titik tunggal.
  */
 void MidcircleFilled(int centerX, int centerY, int radius, Color color) {
+    if (wireframeMode) {
+        Midcircle(centerX, centerY, radius, color);
+        return;
+    }
+
     if (radius <= 0) {
         DrawPixel(centerX, centerY, color);
         return;
@@ -107,6 +114,11 @@ void MidcircleFilled(int centerX, int centerY, int radius, Color color) {
  * yang berbeda untuk menciptakan efek tebal.
  */
 void MidcircleThick(int centerX, int centerY, int radius, int thickness, Color color) {
+    if (wireframeMode) {
+        Midcircle(centerX, centerY, radius, color);
+        return;
+    }
+
     if (radius <= 0 || thickness <= 0) {
         DrawPixel(centerX, centerY, color);
         return;

@@ -113,4 +113,91 @@ void DrawPrize(Prize p) {
         return; 
     }
 
+    //tipe 3 logo polban
+    if (p.type == 3) {
+        int x = (int)p.x;
+        int y = (int)p.y;
+        int r = p.radius;
+
+        // Definisi Warna berdasarkan Gambar
+        Color logoBlue   = (Color){ 0, 20, 150, 255 };    // Biru Tua Frame
+        Color logoGray   = (Color){ 220, 220, 220, 255 }; // Abu-abu Terang Tengah
+        Color logoOrange = (Color){ 210, 105, 30, 255 };  // Oranye Kecokelatan (Tiga Garis)
+        
+        // 1. Gambar Lingkaran Luar (Frame Biru)
+        MidcircleFilled(x, y, r, logoBlue);
+
+        // 2. Gambar Lingkaran Dalam (Isi Abu-abu)
+        MidcircleFilled(x, y, (int)(r * 0.85f), logoGray);
+
+        // 3. Gambar Tiga Garis Diagonal Oranye
+        int thickness = (int)(r * 0.22f); 
+        int spacing   = (int)(r * 0.38f); 
+        int len       = (int)(r * 0.85f); 
+        
+        for (int i = -1; i <= 1; i++) {
+            int offset = i * spacing;
+            int startX = x - len + offset;
+            int startY = y + len + offset; 
+            
+            int endX   = x + len + offset;
+            int endY   = y - len + offset;
+
+            DDA_ThickLine(startX, startY, endX, endY, thickness, logoOrange);
+        }
+
+        return;
+    }
+    // JIKA OBJEK ADALAH TOKEN JTK tipe 4
+    if (p.type == 4) {
+        int x = (int)p.x;
+        int y = (int)p.y;
+        int r = p.radius;
+
+        // 1. Dasar Token / Koin
+        // Menggunakan warna dasar dari objek (p.color)
+        MidcircleFilled(x, y, r, p.color);
+        
+        // Garis dekorasi dalam agar terlihat seperti koin
+        MidcircleThick(x, y, r - 4, 2, RAYWHITE);
+        
+        // Garis luar token
+        MidcircleThick(x, y, r, 3, BLACK);
+
+        // 2. Persiapan Menggambar Teks "JTK"
+        int thick = r / 8; 
+        if (thick < 2) thick = 2; 
+        
+        Color textColor = RAYWHITE;
+
+        // Titik acuan tinggi huruf (Relatif terhadap titik pusat Y)
+        int topY = y - (int)(r * 0.4f);
+        int midY = y;
+        int botY = y + (int)(r * 0.4f);
+
+        // HURUF J 
+        // Garis atas J
+        DDA_ThickLine(x - (int)(r * 0.6f), topY, x - (int)(r * 0.2f), topY, thick, textColor);
+        // Garis vertikal J (kanan)
+        DDA_ThickLine(x - (int)(r * 0.35f), topY, x - (int)(r * 0.35f), botY - (int)(r * 0.1f), thick, textColor);
+        // Lengkungan bawah J (dibuat agak patah/bersudut dengan 2 garis)
+        DDA_ThickLine(x - (int)(r * 0.35f), botY - (int)(r * 0.1f), x - (int)(r * 0.5f), botY, thick, textColor);
+        DDA_ThickLine(x - (int)(r * 0.5f), botY, x - (int)(r * 0.65f), botY - (int)(r * 0.2f), thick, textColor);
+
+        // HURUF T
+        // Garis atas T
+        DDA_ThickLine(x - (int)(r * 0.15f), topY, x + (int)(r * 0.15f), topY, thick, textColor);
+        // Garis vertikal T (di tengah token)
+        DDA_ThickLine(x, topY, x, botY, thick, textColor);
+
+        // HURUF K 
+        // Garis vertikal K
+        DDA_ThickLine(x + (int)(r * 0.25f), topY, x + (int)(r * 0.25f), botY, thick, textColor);
+        // Garis diagonal atas K (menarik dari tengah K ke kanan atas)
+        DDA_ThickLine(x + (int)(r * 0.25f), midY, x + (int)(r * 0.55f), topY, thick, textColor);
+        // Garis diagonal bawah K (menarik dari tengah K ke kanan bawah)
+        DDA_ThickLine(x + (int)(r * 0.25f), midY, x + (int)(r * 0.55f), botY, thick, textColor);
+        
+        return;
+    }
 }

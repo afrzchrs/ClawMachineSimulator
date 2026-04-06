@@ -1,5 +1,14 @@
 #include "src/ui/bodyMesin.h"
 
+extern int wireframeMode;
+
+void DrawWireframeRect(int x, int y, int w, int h, Color color) {
+    DDALine(x, y, x + w, y, color);           // Garis atas
+    DDALine(x + w, y, x + w, y + h, color);   // Garis kanan
+    DDALine(x + w, y + h, x, y + h, color);   // Garis bawah
+    DDALine(x, y + h, x, y, color);           // Garis kiri
+}
+
 void efekBgMiring(void){
     float currentTime = GetTime();
     Color gridColor = (Color){250, 227, 146, 60}; 
@@ -7,7 +16,6 @@ void efekBgMiring(void){
     int speedGrid = 30; 
     int spacing = 40; 
     
-    // Pergerakan offset (mirip dengan kodemu sebelumnya)
     int offset = (int)(currentTime * speedGrid) % spacing; 
 
     int batasAwal = -SCREEN_H;
@@ -16,7 +24,7 @@ void efekBgMiring(void){
     for (int i = batasAwal; i <= batasAkhir; i += spacing) {
         int x1 = i + offset;
         int y1 = 0;
-        int x2 = i + offset + SCREEN_H; // X bertambah seiring turunnya Y (Miring ke kanan)
+        int x2 = i + offset + SCREEN_H; 
         int y2 = SCREEN_H;
         
         DDA_ThickLine(x1, y1, x2, y2, 2, gridColor); 
@@ -30,12 +38,10 @@ void efekBgDown(void){
     int speedGrid = 30; 
     int offset = (int)(currentTime * speedGrid) % 40; 
 
-    // Garis Vertikal Statis
     for (int i = 0; i <= SCREEN_W; i += 40) {
         DDA_ThickLine(i, 0, i, SCREEN_H, 2, gridColor); 
     }
     
-    // Garis Horizontal Bergerak ke bawah
     for (int i = -40; i <= SCREEN_H; i += 40) {
         DDA_ThickLine(0, i + offset, SCREEN_W, i + offset, 2, gridColor); 
     }
@@ -47,6 +53,53 @@ void efekBg(int type){
 }
 
 void DrawBodyMesin(float clawX, float clawY, float dropX) {
+    if (wireframeMode) {
+        // Background hitam agar garis terlihat jelas
+        ClearBackground(BLACK);
+
+        // Grid background 
+        efekBgDown(); 
+
+        // Warna garis kerangka mesin capit
+        Color wfColor = LIME; 
+
+        // Area Kaca / Play Area
+        DrawWireframeRect(60, 40, SCREEN_W - 120, 420, RAYWHITE);
+        // Pilar Atas Full
+        DrawWireframeRect(60, 0, SCREEN_W - 120, 40, wfColor);
+        // Pilar Kiri & Kanan COklat bawah
+        DrawWireframeRect(0, 0, 60, 456, wfColor);
+        DrawWireframeRect(SCREEN_W - 60, 0, 60, 456, wfColor);
+        // Pilar putih bagian dalam kiri & kanan
+        DrawWireframeRect(0, 56, 60, 200, YELLOW);
+        DrawWireframeRect(SCREEN_W - 60, 56, 60, 200, YELLOW);
+        // Strip ijo (tengah)
+        DrawWireframeRect(0, 250, 60, 15, YELLOW);
+        DrawWireframeRect(SCREEN_W-60, 250, 60, 15, YELLOW);
+        // Strip kecil atas
+        DrawWireframeRect(0, 50, 20, 10, YELLOW);
+        DrawWireframeRect(SCREEN_W-60, 50, 60, 10, YELLOW);
+        // Rel kaca atas
+        DrawWireframeRect(60, 35, SCREEN_W - 120, 5, RED);
+        // Garis Pembatas / Lantai Mesin
+        DrawWireframeRect(0, 456, SCREEN_W, 18, YELLOW);
+        // Body mesin bawah 
+        DrawWireframeRect(0, 474, SCREEN_W, 200, wfColor);
+        // Control Panel Bawah
+        DrawWireframeRect(198, 540, SCREEN_W - 270, 90, GREEN);
+        // Control Panel Base
+        DrawWireframeRect(198, 480, SCREEN_W - 270, 90, LIME);
+        // Tembok pembatas drop area dan prize area
+        DrawWireframeRect(60, 474, 113, 93, wfColor); 
+        
+        // Pembatas dalam (DDA_ThickLine akan menjadi tipis berkat dda.c sebelumnya)
+        DDA_ThickLine(180, 380, 180, 470, 16, YELLOW);
+        
+        DrawText("DROP", (int)dropX - 20, 410, 16, YELLOW);
+        
+        return; 
+    }
+    
     // Background Utama (Abu-abu terang)
     ClearBackground((Color){26, 93, 26, 255});
 

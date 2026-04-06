@@ -17,6 +17,8 @@ static Prize prizes[MAX_PRIZES];
 static int heldPrize = -1; 
 static float armOffset = 25.0f; 
 
+int wireframeMode = 0; // buat Xray
+
 // Posisi lubang hadiah (Drop Area)
 static float dropX = 115.0f;
 
@@ -49,16 +51,16 @@ void InitClaw(void) {
         prizes[9] = (Prize){ SCREEN_W/2 + 175, 385, 24, VIOLET, 0, 0, 0 };
         prizes[10]= (Prize){ SCREEN_W/2 + 225, 385, 24, SKYBLUE, 0, 0, 0 }; 
         prizes[16]= (Prize){ SCREEN_W/2 + 275, 385, 22, DARKGRAY, 0, 0, 1 }; 
-        prizes[18]= (Prize){ SCREEN_W/2 - 20, 385, 24, VIOLET, 0, 0, 0 }; 
+        prizes[18]= (Prize){ SCREEN_W/2 - 20, 385, 24, VIOLET, 0, 0, 4 }; 
         prizes[19]= (Prize){ SCREEN_W/2 - 70, 385, 24, DARKGRAY, 0, 0, 1 }; 
         prizes[20]= (Prize){ SCREEN_W/2 - 125, 385, 24, SKYBLUE, 0, 0, 2 }; 
-        prizes[21]= (Prize){ SCREEN_W/2 - 175, 385, 24, RED, 0, 0, 0 }; 
+        prizes[21]= (Prize){ SCREEN_W/2 - 175, 385, 24, RED, 0, 0, 4 }; 
         
         //BARIS ATAS (y = 340)
         prizes[22]= (Prize){ SCREEN_W/2 + 205, 340, 24, DARKGRAY, 0, 0, 1 }; 
-        prizes[23]= (Prize){ SCREEN_W/2 + 150, 340, 24, GREEN, 0, 0, 0 }; 
+        prizes[23]= (Prize){ SCREEN_W/2 + 150, 340, 24, GREEN, 0, 0, 3 };  // logo polban 
         prizes[24]= (Prize){ SCREEN_W/2 + 255, 345, 24, SKYBLUE, 0, 0, 0 }; 
-        prizes[17] = (Prize){ SCREEN_W/2 + 313, 350, 24, RED, 0, 0, 0 };
+        prizes[25] = (Prize){ SCREEN_W/2 + 313, 350, 24, RED, 0, 0, 3 }; //logo polban
         initialized = 1;
     }
 }
@@ -66,7 +68,23 @@ void InitClaw(void) {
 int DrawProgramClaw(void) {
 
     InitClaw(); 
+    
     float dt = GetFrameTime();
+
+    // ---- PENGATUR KECEPATAN MOTOR CAPIT (IDE 3) ----
+    if (IsKeyPressed(KEY_UP)) {
+        clawSpeed += 40.0f; // Tambah kecepatan
+        if (clawSpeed > 400.0f) clawSpeed = 400.0f; // Batas maksimal
+    }
+    if (IsKeyPressed(KEY_DOWN)) {
+        clawSpeed -= 40.0f; // Kurangi kecepatan
+        if (clawSpeed < 60.0f) clawSpeed = 60.0f; // Batas minimal
+    }
+    // ------------------------------------------------
+
+    if (IsKeyPressed(KEY_W)) {
+        wireframeMode = !wireframeMode;
+    }
 
     Rectangle btnRec = {SCREEN_W / 2 + 85, 505, 100, 40};
     Vector2 mouse = GetMousePosition();
@@ -304,6 +322,8 @@ int DrawProgramClaw(void) {
     
     // indikator skor
     DrawIndikatorSkor(prizes);
+
+    DrawText(TextFormat("MOTOR SPEED: %.0f", clawSpeed), 20, 20, 20, YELLOW);
     
     EndMode2D(); //Akhir geter
 
